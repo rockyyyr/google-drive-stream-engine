@@ -31,8 +31,8 @@ process.on('SIGTERM', stop);
  * 
  * @param {number} port 
  */
-function start(port) {
-    instance = server.listen(port, () => console.log(`Google drive stream server listening on port ${port}`));
+function start(port, logging = false) {
+    instance = server.listen(port, () => logging && console.log(`Google drive stream server listening on port ${port}`));
 }
 
 /**

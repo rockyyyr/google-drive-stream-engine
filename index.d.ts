@@ -3,12 +3,11 @@
  *
  * @param {number} port
  */
-export function start(port: number): void;
+export function start(port: number, logging?: boolean): void;
 /**
  * Stop the stream server
  */
 export function stop(): void;
-
 
 declare const _exports: typeof import("./src/server");
 export = _exports;
