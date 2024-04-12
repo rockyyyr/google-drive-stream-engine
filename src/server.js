@@ -7,7 +7,7 @@ server.use(express.json());
 server.use(cors());
 server.set('trust proxy', true);
 
-server.get('/stream/:id', authenticate, async (req, res) => {
+server.get('/stream/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const { q } = req.query;
