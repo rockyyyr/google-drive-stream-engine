@@ -22,19 +22,29 @@ server.get('/stream/:id', authenticate, async (req, res) => {
     }
 });
 
-function start(port) {
-    const instance = server.listen(port, () => console.log(`Google drive stream server listening on port ${port}`));
+let instance;
 
-    ['SIGINT', 'SIGTERM'].forEach(signal => {
-        process.on(signal, () => {
-            if (instance) {
-                instance.close();
-            }
-            if (db) {
-                db.destroy();
-            }
-        });
-    });
+process.on('SIGTERM', stop);
+
+/**
+ * Start the stream server
+ * 
+ * @param {number} port 
+ */
+function start(port) {
+    instance = server.listen(port, () => console.log(`Google drive stream server listening on port ${port}`));
 }
 
-module.exports = start;
+/**
+ * Stop the stream server
+ */
+function stop() {
+    if (instance) {
+        instance.close();
+    }
+}
+
+module.exports = {
+    start,
+    stop
+};
